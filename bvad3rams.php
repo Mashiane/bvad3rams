@@ -214,7 +214,7 @@ try {
     $command = 'changes'; 
     } 
     switch ($command) { 
-case "changes": 
+	case "changes": 
     $stmt = $conn->prepare($query); 
     $stmt->execute($args); 
     $affRows = $stmt->rowCount(); 
@@ -268,7 +268,7 @@ case "changes":
         $command = 'changes'; 
         } 
         switch ($command) { 
-    case "changes": 
+		case "changes": 
         $stmt = $conn->prepare($query); 
         $stmt->execute($args); 
         $affRows = $stmt->rowCount(); 
@@ -304,9 +304,6 @@ case "changes":
         } 
         } 
      
-//ini_set('display_errors', 1); 
-//ini_set('display_startup_errors', 1); 
-//error_reporting(E_ALL); 
 function get_result(\mysqli_stmt $statement) 
 { 
 $result = array(); 
@@ -372,6 +369,27 @@ for ($i = 0; $i < $statement->num_rows; $i++)
         $command = 'changes'; 
         } 
         switch ($command) { 
+		case "assigntoken": 
+		//assign a 36 length token to the second argument 
+		//first arguement is the username 
+		$args[0] = bin2hex(openssl_random_pseudo_bytes(36)); 
+		$stmt = prepareMySQL($conn, $query, $types, $args); 
+        if (! $stmt -> execute()) { 
+        	$response = $stmt->error; 
+        	$resp['response'] = "Error"; 
+        	$resp['error'] = $response; 
+        	$resp['result'] = array(); 
+        	$output = json_encode($resp); 
+			$encrypted = $Encryption->encrypt($output, DB_KEY); 
+    	    die($encrypted); 
+        } 
+        $affRows = $conn->affected_rows; 
+        $resp['response'] = "Success"; 
+        $resp['error'] = ''; 
+        $resp['result'] = array(); 
+        $resp['affectedRows'] = $affRows; 
+        $output = json_encode($resp); 
+    	break; 
     case "changes": 
         $stmt = prepareMySQL($conn, $query, $types, $args); 
         if (! $stmt -> execute()) { 
@@ -439,6 +457,27 @@ for ($i = 0; $i < $statement->num_rows; $i++)
         $command = 'changes'; 
         } 
         switch ($command) { 
+		case "assigntoken": 
+		//assign a 36 length token to the second argument 
+		//first arguement is the username 
+		$args[0] = bin2hex(openssl_random_pseudo_bytes(36)); 
+		$stmt = prepareMySQL($conn, $query, $types, $args); 
+        if (! $stmt -> execute()) { 
+        	$response = $stmt->error; 
+        	$resp['response'] = "Error"; 
+        	$resp['error'] = $response; 
+        	$resp['result'] = array(); 
+        	$output = json_encode($resp); 
+			$encrypted = $Encryption->encrypt($output, DB_KEY); 
+    	    die($encrypted); 
+        } 
+        $affRows = $conn->affected_rows; 
+        $resp['response'] = "Success"; 
+        $resp['error'] = ''; 
+        $resp['result'] = array(); 
+        $resp['affectedRows'] = $affRows; 
+        $output = json_encode($resp); 
+    	break; 
     case "changes": 
         $stmt = prepareMySQL($conn, $query, $types, $args); 
         if (! $stmt -> execute()) { 
@@ -517,6 +556,27 @@ for ($i = 0; $i < $statement->num_rows; $i++)
             $command = 'changes'; 
             } 
             switch ($command) { 
+			case "assigntoken": 
+		//assign a 36 length token to the second argument 
+		//first arguement is the username 
+		$args[0] = bin2hex(openssl_random_pseudo_bytes(36)); 
+		$stmt = prepareMySQL($conn, $query, $types, $args); 
+        if (! $stmt -> execute()) { 
+        	$response = $stmt->error; 
+        	$resp['response'] = "Error"; 
+        	$resp['error'] = $response; 
+        	$resp['result'] = array(); 
+        	$output = json_encode($resp); 
+			$encrypted = $Encryption->encrypt($output, DB_KEY); 
+    	    die($encrypted); 
+        } 
+        $affRows = $conn->affected_rows; 
+        $resp['response'] = "Success"; 
+        $resp['error'] = ''; 
+        $resp['result'] = array(); 
+        $resp['affectedRows'] = $affRows; 
+        $output = json_encode($resp); 
+    	break; 
         case "connection": 
             $resp['response'] = "Success"; 
             $resp['error'] = ''; 
@@ -679,7 +739,28 @@ function BANanoMySQLED($data) {
         $command = 'changes'; 
     } 
     switch ($command) { 
-    case "changes": 
+    case "assigntoken": 
+		//assign a 36 length token to the second argument 
+		//first arguement is the username 
+		$args[0] = bin2hex(openssl_random_pseudo_bytes(36)); 
+		$stmt = prepareMySQL($conn, $query, $types, $args); 
+        if (! $stmt -> execute()) { 
+        	$response = $stmt->error; 
+        	$resp['response'] = "Error"; 
+        	$resp['error'] = $response; 
+        	$resp['result'] = array(); 
+        	$output = json_encode($resp); 
+			$encrypted = $Encryption->encrypt($output, DB_KEY); 
+    	    die($encrypted); 
+        } 
+        $affRows = $conn->affected_rows; 
+        $resp['response'] = "Success"; 
+        $resp['error'] = ''; 
+        $resp['result'] = array(); 
+        $resp['affectedRows'] = $affRows; 
+        $output = json_encode($resp); 
+    	break; 
+	case "changes": 
         $stmt = prepareMySQL($conn, $query, $types, $args); 
         if (! $stmt -> execute()) { 
         	$response = $stmt->error; 
@@ -1358,4 +1439,9 @@ case "changes":
             } 
             $db->close(); 
             } 
-        $values = array_values($params);call_user_func_array($request, $values);?>
+         
+	function BVAD3GUID($l) { 
+	$guid = bin2hex(openssl_random_pseudo_bytes($l)); 
+	echo($guid); 
+	} 
+$values = array_values($params);call_user_func_array($request, $values);?>
